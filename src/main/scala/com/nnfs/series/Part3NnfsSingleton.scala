@@ -22,6 +22,6 @@ object Part3NnfsSingleton extends App {
     case (w, b) => inputs.lazyZip(w).map(_ * _).sum + b
   }
 
-  println("Dot Product Output: ", output)
+  println("Dot Product Output: \n" + output)
 
 }

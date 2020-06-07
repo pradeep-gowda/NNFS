@@ -15,20 +15,20 @@ object Part1NnfsSingleton extends App {
   val bias = 3
 
   val output = inputs(0)*weights(0) + inputs(1)*weights(1) + inputs(2)*weights(2) + bias
-  println("Output: ", output)
+  println("Output: \n" + output)
 
   // zip creates tuples
   // zip followed by map will result in two separate transformations due to strictness
   val output1 = inputs.zip(weights).map { case (i, w) => i * w }.sum + bias
-  println("Output1: ", output1)
+  println("Output1: \n" + output1)
 
   // lazyZip is faster than zip
   // lazyZip followed by map will result in a single transformation executed in one go due to laziness.
   val output2 = ((inputs lazyZip weights) map { case (i, w) => i * w }).sum + bias
   val output3 = inputs.lazyZip(weights).map { case (i, w) => i * w }.sum + bias
   val output4 = inputs.lazyZip(weights).map(_ * _).sum + bias
-  println("Output2: ", output2)
-  println("Output3: ", output3)
-  println("Output4: ", output4)
+  println("Output2: \n" + output2)
+  println("Output3: \n" + output3)
+  println("Output4: \n" + output4)
 
 }

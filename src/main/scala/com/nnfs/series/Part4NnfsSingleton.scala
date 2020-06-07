@@ -17,12 +17,12 @@ object Part4NnfsSingleton extends App {
     List(2.0, 5.0, -1.0, 2.0),
     List(-1.5, 2.7, 3.3, -0.8)
   )
-  val weights = List(
+  val weights1 = List(
     List(0.2, 0.8, -0.5, 1.0),
     List(0.5, -0.91, 0.26, -0.5),
     List(-0.26, -0.27, 0.17, 0.87)
   )
-  val biases = List(2, 3, 0.5)
+  val biases1 = List(2, 3, 0.5)
 
   val weights2 = List(
     List(0.1, -0.14, 0.5),
@@ -43,9 +43,8 @@ object Part4NnfsSingleton extends App {
     }
   }
 
-  val layer1_output = dotProduct(X, weights, biases)
-  val output = dotProduct(layer1_output, weights2, biases2)
-  println("Output: ", output)
+  val layer1_output = dotProduct(X, weights1, biases1)
+  val outputWithoutLibrary = dotProduct(layer1_output, weights2, biases2)
 
 
   // Using numsca library
@@ -56,17 +55,18 @@ object Part4NnfsSingleton extends App {
   val b2 = ns.array(-1, 2, -0.5).reshape(1, 3)
 
   val outLayer1 =  x.dot(w1.T) + b1
-  val outLayer2 =  outLayer1.dot(w2.T) + b2
+  val OutputWithPreDefinedWeights =  outLayer1.dot(w2.T) + b2
 
-  println("res: ", outLayer2)
 
   // Using Dense layer class
   val layer1 = new LayerDense(4,5)
-  val layer2 = new LayerDense(5,2)
+  val layer2 = new LayerDense(5,3)
 
   val outputLayer1 = layer1.forward(x)
-  val outputLayer2 = layer2.forward(outputLayer1)
-  println("Output: ", outputLayer2)
+  val OutputWithRandomWeights = layer2.forward(outputLayer1)
 
+  println("Layer Output without library: \n" + outputWithoutLibrary)
+  println("Layer Output with pre-defined weights: \n" + OutputWithPreDefinedWeights)
+  println("Layer Output with non-deterministic(random) weights: \n" + OutputWithRandomWeights)
 
 }

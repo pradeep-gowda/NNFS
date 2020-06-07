@@ -25,20 +25,20 @@ object Part2NnfsSingleton extends App {
     inputs(0)*weights3(0) + inputs(1)*weights3(1) + inputs(2)*weights3(2) + inputs(3)*weights3(3) + bias3
   )
 
-  println("Output: ", output)
+  println("Output: \n" + output)
 
   val output1 = List(
     inputs.zip(weights1).map { case (i, w) => i * w }.sum + bias1,
     inputs.zip(weights2).map { case (i, w) => i * w }.sum + bias2,
     inputs.zip(weights3).map { case (i, w) => i * w }.sum + bias3
   )
-  println("Output1: ", output1)
+  println("Output1: \n" + output1)
 
   val output2 = List(
     inputs.lazyZip(weights1).map(_ * _).sum + bias1,
     inputs.lazyZip(weights2).map(_ * _).sum + bias2,
     inputs.lazyZip(weights3).map(_ * _).sum + bias3
   )
-  println("Output2: ", output2)
+  println("Output2: \n" + output2)
 
 }
